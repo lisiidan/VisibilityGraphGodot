@@ -15,11 +15,12 @@
 
 [node name="Robot" parent="." instance=ExtResource("1_ig7tw")]
 unique_name_in_owner = true
-position = Vector2(-351, -193)
+position = Vector2(-344, -191)
+robot_radius = 18.9
 
 [node name="Finish" type="Area2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(33, 123)
+position = Vector2(3, -27)
 script = ExtResource("3_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
@@ -34,9 +35,6 @@ theme_override_fonts/font = SubResource("FontVariation_h2yge")
 theme_override_font_sizes/font_size = 24
 text = "Finish"
 
-[node name="PathFinder" type="Node2D" parent="."]
-script = ExtResource("3_1bvp3")
-
 [node name="Obstacles" type="Node" parent="."]
 
 [node name="Obstacle4" type="StaticBody2D" parent="Obstacles" groups=["Obstacles"]]
@@ -44,6 +42,8 @@ position = Vector2(89, -149)
 script = ExtResource("4_lquwl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle4"]
+position = Vector2(-281, -13)
+polygon = PackedVector2Array(51.39095, -116.44009, 28.89901, -35.12306, 129.0462, -36.01724, 138.33994, -11.27413, 46.51592, 67.60035, 36.68258, 69.50789, -103.58782, 22.01476, -109.85114, 5.13515, -51.74796, -93.19331, -47.25593, -97.15533, 33.42215, -132.0757)
 
 [node name="Polygon2D" type="Polygon2D" parent="Obstacles/Obstacle4"]
 position = Vector2(-281, -13)
@@ -54,6 +54,8 @@ position = Vector2(44, 92)
 script = ExtResource("4_lquwl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle3"]
+position = Vector2(-281, -13)
+polygon = PackedVector2Array(37.28633, -105.29467, 182.62794, -43.16391, 181.11017, -16.67386, 125.25794, -0.03702, 46.51592, 67.60035, 36.68258, 69.50789, -103.58782, 22.01476, -109.85114, 5.13515, -50.94314, -94.55531, -43.19694, -99.43246, 32.68424, -106.03082)
 
 [node name="Polygon2D" type="Polygon2D" parent="Obstacles/Obstacle3"]
 position = Vector2(-281, -13)
@@ -64,6 +66,8 @@ position = Vector2(-74, -43)
 script = ExtResource("4_lquwl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle2"]
+position = Vector2(-281, -13)
+polygon = PackedVector2Array(38.983, -105.78312, 134.83398, -25.90731, 134.96497, -8.37511, 46.51592, 67.60035, 36.68258, 69.50789, -105.75954, 21.27945, -109.51457, -0.99609, 25.66462, -106.01133)
 
 [node name="Polygon2D" type="Polygon2D" parent="Obstacles/Obstacle2"]
 position = Vector2(-281, -13)
@@ -74,8 +78,14 @@ position = Vector2(-74, -43)
 script = ExtResource("4_lquwl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle"]
+polygon = PackedVector2Array(50.37844, -99.3225, 57.31796, 59.12971, 41.37858, 71.09787, -105.75954, 21.27945, -109.51457, -0.99609, 29.49185, -108.98455)
 
 [node name="Polygon2D" type="Polygon2D" parent="Obstacles/Obstacle"]
 polygon = PackedVector2Array(-89, 7, 32, -87, 38, 50)
 
+[node name="PathFinder" type="Node2D" parent="."]
+script = ExtResource("3_1bvp3")
+
+[connection signal="radius_changed" from="Robot" to="Obstacles/Obstacle" method="_on_robot_radius_changed"]
 [connection signal="body_entered" from="Finish" to="Finish" method="_on_body_entered"]
+[connection signal="path_ready" from="PathFinder" to="Robot" method="_on_path_finder_path_ready"]

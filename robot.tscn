@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfh6uroj1b2pg"]
+[gd_scene load_steps=3 format=3 uid="uid://dfh6uroj1b2pg"]
 
-[ext_resource type="Texture2D" uid="uid://sievtk3hoyk8" path="res://icon.svg" id="1_3cn6f"]
 [ext_resource type="Script" uid="uid://dicmkiwxxvy5u" path="res://robot.gd" id="1_dfm56"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yhfw1"]
+radius = 1.0
 
 [node name="Robot" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_dfm56")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yhfw1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_3cn6f")
+scale = Vector2(0.28124997, 0.21874997)
