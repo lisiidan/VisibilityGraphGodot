@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dicmkiwxxvy5u" path="res://robot.gd" id="1_dfm56"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yhfw1"]
-radius = 1.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cn6f"]
+radius = 12.0
 
 [node name="Robot" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_dfm56")
+robot_radius = 12.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_yhfw1")
+shape = SubResource("CircleShape2D_3cn6f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.28124997, 0.21874997)

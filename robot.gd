@@ -3,6 +3,10 @@
 
 extends CharacterBody2D
 signal radius_changed(new_radius: float)
+var can_move: bool = false
+@onready var reduced_visibility_button: CheckButton = %ReducedVisibilityButton
+@onready var robot_radius_slider: HSlider = %RobotRadiusSlider
+@onready var go_button: Button = %GoButton
 
 @onready var cshape: CollisionShape2D = $CollisionShape2D
 @export var speed: float = 120.0
@@ -17,7 +21,7 @@ var robot_radius: float:
 		emit_signal("radius_changed", _robot_radius)
 	get:
 		return _robot_radius
-var _robot_radius := 12.0
+var _robot_radius := 1.0
 var _path: PackedVector2Array = []
 var _next_waypoint = 0
 func get_input():
@@ -26,7 +30,7 @@ func get_input():
 	
 func _physics_process(delta: float) -> void:
 	# If path is not ready yet or finish is reached, stop
-	if _path.is_empty() or _next_waypoint >= _path.size():
+	if _path.is_empty() or _next_waypoint >= _path.size() or !can_move:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -63,6 +67,24 @@ func _apply_radius_to_shape(r: float) -> void:
 		queue_redraw()
 		
 func _draw():
-	# ✅ Draw circle in both editor and runtime
-	draw_circle(Vector2.ZERO, _robot_radius, Color(1, 1, 0, 0.3))
-	draw_circle(Vector2.ZERO, _robot_radius, Color(1, 1, 0, 1), false, 2)
+	# Draw circle in both editor and runtime
+	draw_circle(Vector2.ZERO, _robot_radius, Color(0, 0, 1, 0.3))
+	draw_circle(Vector2.ZERO, _robot_radius, Color(0, 0, 1, 1), false, 2)
+
+
+func _on_go_button_pressed() -> void:
+	can_move = true
+	reduced_visibility_button.disabled = true
+	robot_radius_slider.editable = false
+	go_button.disabled = true
+	
+	reduced_visibility_button.visible = false
+	robot_radius_slider.visible = false
+	go_button.visible = false
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
