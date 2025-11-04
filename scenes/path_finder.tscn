@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fartgfx5h4ff"]
+
+[ext_resource type="Script" uid="uid://bqpaiejplbt53" path="res://scripts/path_finder.gd" id="1_ae373"]
+
+[node name="PathFinder" type="Node2D"]
+script = ExtResource("1_ae373")

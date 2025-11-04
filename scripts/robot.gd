@@ -72,19 +72,5 @@ func _draw():
 	draw_circle(Vector2.ZERO, _robot_radius, Color(0, 0, 1, 1), false, 2)
 
 
-func _on_go_button_pressed() -> void:
+func on_go_button_pressed() -> void:
 	can_move = true
-	reduced_visibility_button.disabled = true
-	robot_radius_slider.editable = false
-	go_button.disabled = true
-	
-	reduced_visibility_button.visible = false
-	robot_radius_slider.visible = false
-	go_button.visible = false
-
-
-func _on_restart_button_pressed() -> void:
-	get_tree().reload_current_scene()
-
-func _on_exit_button_pressed() -> void:
-	get_tree().quit()

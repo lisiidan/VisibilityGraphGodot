@@ -40,7 +40,6 @@ func build_visibility_graph():
 	allVertices.append(start_point)
 	allVertices.append(end_point)
 	
-	# Collect obstacle vertices positions
 	obstaclesVertices.clear()
 	for obstacle in obstacles:
 		if obstacle is StaticBody2D:
@@ -48,7 +47,6 @@ func build_visibility_graph():
 			if collision_of_obstacle == null: continue
 			var polygonVertices := PackedVector2Array()
 			for vertex in collision_of_obstacle.polygon:
-				#print("Append vertex: " + str(vertex))
 				polygonVertices.append(collision_of_obstacle.to_global(vertex))
 			obstaclesVertices.append(polygonVertices)
 	
@@ -82,8 +80,6 @@ func build_visibility_graph():
 	_dbg_path.clear()
 	for p in path:
 		_dbg_path.append(to_local(p))
-	print("path from :" + str(start_point) + " to " + str(end_point) + " is: ")
-	print(path)
 	queue_redraw()
 	return path
 
@@ -298,8 +294,9 @@ func _vertex_location(p: Vector2) -> Dictionary:
 			return {"poly": poly, "idx": i}
 	return {"poly": null, "idx": -1}
 
+# ========================= UI interactions ===================================
 
-func _on_reduced_visibility_button_toggled(toggled_on: bool) -> void:
+func on_reduced_visibility_button_toggled(toggled_on: bool) -> void:
 	if(toggled_on):
 		graph_mode = 1
 	else:
@@ -307,9 +304,9 @@ func _on_reduced_visibility_button_toggled(toggled_on: bool) -> void:
 	call_deferred("build_path_and_emit_signal")
 
 
-func _on_start_navigating_button_pressed() -> void:
+func on_start_navigating_button_pressed() -> void:
 	call_deferred("build_path_and_emit_signal")
 
-func _on_robot_radius_slider_value_changed(value: float) -> void:
+func on_robot_radius_slider_value_changed(value: float) -> void:
 	robot.robot_radius = value
 	call_deferred("build_path_and_emit_signal")
