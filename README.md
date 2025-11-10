@@ -1,6 +1,6 @@
 # Robot Path Finder
 
-Acest proiect conține aplicația **RobotPathFinder_VG** care permite vizualizarea și testarea algoritmilor de găsire a căii pentru roboți, într-un mediu cu obstacole definite de utilizator.
+Acest proiect conține aplicația **RobotPathFinder_VG** care permite vizualizarea și testarea algoritmului de găsire a căii pentru roboți, într-un mediu cu obstacole definite de utilizator.
 
 ## Pornire Rapidă
 
