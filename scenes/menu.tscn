@@ -78,14 +78,26 @@ offset_right = 326.0
 offset_bottom = 38.0
 text = "Go"
 
+[node name="DrawButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -93.0
+offset_top = 47.0
+offset_right = -30.0
+offset_bottom = 88.0
+text = "Draw Mode"
+icon_alignment = 2
+
 [node name="DebugCollisionCheck" type="CheckBox" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = 798.0
 offset_top = 48.0
 offset_right = 1026.0
 offset_bottom = 79.0
 focus_mode = 0
+disabled = true
 text = "Show expanded obstacles"
 
 [node name="ExitButton" type="Button" parent="."]
@@ -96,3 +108,19 @@ offset_top = -2.0
 offset_right = 1026.0
 offset_bottom = 39.0
 text = "Exit"
+
+[node name="DrawHint1" type="Label" parent="."]
+layout_mode = 0
+offset_left = -85.0
+offset_top = 607.0
+offset_right = 84.0
+offset_bottom = 630.0
+text = "You can drag robot finish and obstacles"
+
+[node name="DrawHint2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 606.0
+offset_right = 396.0
+offset_bottom = 629.0
+text = "Right click to add obstacle from points"

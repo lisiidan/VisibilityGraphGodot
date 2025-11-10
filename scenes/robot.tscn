@@ -1,18 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfh6uroj1b2pg"]
+[gd_scene load_steps=4 format=3 uid="uid://dfh6uroj1b2pg"]
 
 [ext_resource type="Script" uid="uid://dicmkiwxxvy5u" path="res://scripts/robot.gd" id="1_dfm56"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3cn6f"]
-radius = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_br0rw"]
+radius = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_br0rw"]
+size = Vector2(30, 32)
 
 [node name="Robot" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
+input_pickable = true
 script = ExtResource("1_dfm56")
-robot_radius = 12.0
+robot_radius = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3cn6f")
+shape = SubResource("CircleShape2D_br0rw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.28124997, 0.21874997)
+
+[node name="pickup_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_br0rw")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -23.0
+offset_top = -43.0
+offset_right = 24.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Robot"

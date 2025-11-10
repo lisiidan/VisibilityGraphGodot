@@ -5,8 +5,8 @@ signal path_ready(points: PackedVector2Array)
 @export_enum("Full","Reduced") var graph_mode := 0
 
 @onready var obstacles = get_tree().get_nodes_in_group("Obstacles")
-@onready var robot: CharacterBody2D = %Robot
-@onready var finish: Area2D = %Finish
+@onready var robot: CharacterBody2D = $"../Robot"
+@onready var finish: Area2D = $"../Finish"
 var visibilityGraph := AStar2D.new()
 var verticesIdxInGraph: Dictionary = {}
 # Array which contains arrays of vertices of obstacles
@@ -21,6 +21,8 @@ const EPS := 1e-4
 func extract_global_pos_of_vertices():
 	var global_points: PackedVector2Array = []
 	for obstacle in obstacles:
+		if not is_instance_valid(obstacle):
+			continue
 		if obstacle is StaticBody2D:
 			var collision_of_obstacle = obstacle.find_child("CollisionPolygon2D")
 			if collision_of_obstacle == null:
@@ -42,6 +44,8 @@ func build_visibility_graph():
 	
 	obstaclesVertices.clear()
 	for obstacle in obstacles:
+		if not is_instance_valid(obstacle):
+			continue
 		if obstacle is StaticBody2D:
 			var collision_of_obstacle: CollisionPolygon2D = obstacle.find_child("CollisionPolygon2D")
 			if collision_of_obstacle == null: continue
@@ -294,6 +298,10 @@ func _vertex_location(p: Vector2) -> Dictionary:
 			return {"poly": poly, "idx": i}
 	return {"poly": null, "idx": -1}
 
+func update_obstacles_info() -> void:
+	obstacles = get_tree().get_nodes_in_group("Obstacles")
+	call_deferred("build_path_and_emit_signal")
+
 # ========================= UI interactions ===================================
 
 func on_reduced_visibility_button_toggled(toggled_on: bool) -> void:
@@ -304,7 +312,7 @@ func on_reduced_visibility_button_toggled(toggled_on: bool) -> void:
 	call_deferred("build_path_and_emit_signal")
 
 
-func on_start_navigating_button_pressed() -> void:
+func update_path() -> void:
 	call_deferred("build_path_and_emit_signal")
 
 func on_robot_radius_slider_value_changed(value: float) -> void:

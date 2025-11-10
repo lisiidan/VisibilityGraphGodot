@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://cmrhs47syurod" path="res://scripts/obstacol.gd" id="1_sl1jc"]
 
 [node name="Obstacle4" type="StaticBody2D" groups=["Obstacles"]]
+input_pickable = true
 script = ExtResource("1_sl1jc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-281, -13)
-polygon = PackedVector2Array(31.1318, -110.34075, 5.3174, -17.0118, 116.69028, -18.0062, 117.18201, -16.69704, 38.2192, 51.12998, -90.48774, 7.55204, -37.69555, -81.78859, 30.18107, -111.16803)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(-281, -13)
-polygon = PackedVector2Array(-89, 7, -37, -81, 30, -110, 4, -16, 116, -17, 38, 50)
+polygon = PackedVector2Array(0, 0, 1091, 0, 1091, -1, 0, -1)
